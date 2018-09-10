@@ -1,0 +1,15 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: false  #关闭自我注册
+    fetch-registry: false
+  server:
+    enable-self-preservation: false  #开发环境关闭自我保护机制
+spring:
+  application:
+    name: eureka
+management:
+  server:
+    servlet:
+      context-path: /

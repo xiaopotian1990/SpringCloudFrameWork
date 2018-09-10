@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: config
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/xiaopotian1990/SpringCloudConfig.git
+          basedir: D:\Work\test\SpringCloudDemo\configFile
+          username: xiaopotian1990
+          password: zoulu19900206
+  rabbitmq:
+    host: 182.254.221.58
+    port: 5672
+    username: admin
+    password: zoulu19900206
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
