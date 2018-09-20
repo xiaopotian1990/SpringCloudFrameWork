@@ -11,7 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @EnableFeignClients(basePackages = "com.xiaopotian.product.client")
 @SpringCloudApplication
-//@SpringBootApplication
+//@SpringBootApplication  SpringCloudApplication包含下边三个
 //@EnableDiscoveryClient
 //@EnableCircuitBreaker
 @ComponentScan(basePackages = "com.xiaopotian")
