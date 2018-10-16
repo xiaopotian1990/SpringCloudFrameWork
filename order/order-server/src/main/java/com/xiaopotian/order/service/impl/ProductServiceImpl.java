@@ -34,9 +34,21 @@ public class ProductServiceImpl implements ProductService {
     @HystrixCommand(
             commandProperties = {
                     //超时时间
-                    @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "3000")
+                    @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "3000"),
+                    //确定断路器是否用于跟踪运行状况和短路请求（如果跳闸） 默认true
+                    @HystrixProperty(name = "circuitBreaker.enabled", value = "true"),
+                    //请求数达到后才计算,用于控制Hystrix考虑在熔断器跳闸之前，在10s内必须发生的连续调用数量
+                    @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "10"),
+                    //在超过requestVolumeThreshold值之后在断路器跳闸之前必须达到的调用失败（由于超时、抛出异常或返回HTTP 500）百分比
+                    @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "60"),
+                    //在断路器跳闸之后，Hystrix允许另一个调用通过已便查看服务是否恢复健康之前Hystrix的休眠时间
+                    @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "7000"),
+                    //此属性设置统计滚动窗口的持续时间（以毫秒为单位）。对于断路器的使用和发布Hystrix保持多长时间的指标
+                    @HystrixProperty(name = "metrics.rollingStats.timeInMilliseconds",value = "15000"),
+                    //此属性设置rollingstatistical窗口划分的桶数
+                    @HystrixProperty(name = "metrics.rollingStats.numBuckets",value = "5")
             },
-            //建立一个单独的线程池
+            //设置新的线程池
             threadPoolKey = "decreaseStockThreadPool",
             threadPoolProperties = {
                     //线程池大小
@@ -58,7 +70,21 @@ public class ProductServiceImpl implements ProductService {
      */
     @HystrixCommand(
             commandProperties = {
-                    @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "3000")
+                    //超时时间
+                    @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "3000"),
+                    //确定断路器是否用于跟踪运行状况和短路请求（如果跳闸） 默认true
+                    @HystrixProperty(name = "circuitBreaker.enabled", value = "true"),
+                    //请求数达到后才计算,用于控制Hystrix考虑在熔断器跳闸之前，在10s内必须发生的连续调用数量
+                    @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "10"),
+                    //在超过requestVolumeThreshold值之后在断路器跳闸之前必须达到的调用失败（由于超时、抛出异常或返回HTTP 500）百分比
+                    @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage", value = "60"),
+                    //在断路器跳闸之后，Hystrix允许另一个调用通过已便查看服务是否恢复健康之前Hystrix的休眠时间
+                    @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "7000"),
+                    //此属性设置统计滚动窗口的持续时间（以毫秒为单位）。对于断路器的使用和发布Hystrix保持多长时间的指标
+                    @HystrixProperty(name = "metrics.rollingStats.timeInMilliseconds",value = "15000"),
+                    //此属性设置rollingstatistical窗口划分的桶数
+                    @HystrixProperty(name = "metrics.rollingStats.numBuckets",value = "5"),
+                    @HystrixProperty(name = "execution.isolation.strategy",value = "THREAD")
             },
             threadPoolKey = "decreaseStockThreadPool",
             threadPoolProperties = {

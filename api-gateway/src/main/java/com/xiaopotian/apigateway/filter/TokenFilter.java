@@ -23,21 +23,38 @@ import static org.springframework.cloud.netflix.zuul.filters.support.FilterConst
  */
 @Component
 public class TokenFilter extends ZuulFilter {
+    /**
+     * 过滤器类型 PRE_TYPE：前置过滤器 ROUTE_TYPE：路由过滤器 POST_TYPE：后置过滤器
+     * @return 过滤器类型
+     */
     @Override
     public String filterType() {
         return PRE_TYPE;
     }
 
+    /**
+     * 返回一个数值，指示不同类型的过滤器的执行顺序
+     * @return 数值
+     */
     @Override
     public int filterOrder() {
         return PRE_DECORATION_FILTER_ORDER - 1;
     }
 
+    /**
+     * 返回一个布尔值来指示该过滤器是否要执行
+     * @return 布尔值
+     */
     @Override
     public boolean shouldFilter() {
         return true;
     }
 
+    /**
+     * 每次服务通过过滤器时执行的代码
+     * @return
+     * @throws ZuulException
+     */
     @Override
     public Object run() throws ZuulException {
         RequestContext context = RequestContext.getCurrentContext();

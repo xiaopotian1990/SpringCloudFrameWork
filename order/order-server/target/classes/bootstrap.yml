@@ -7,6 +7,11 @@ spring:
       profile: dev
   application:
     name: order
+  zipkin:
+    base-url: http://localhost:9411/
+  sleuth:
+    sampler:
+      probability: 1
 eureka:
   client:
     service-url:
@@ -14,3 +19,6 @@ eureka:
 feign:
   hystrix:
    enabled: true
+logging:
+  level:
+     org.springframework.cloud.openfeign.FeignClient: debug
