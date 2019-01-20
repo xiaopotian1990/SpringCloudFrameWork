@@ -1,9 +1,14 @@
 eureka:
+  instance:
+    hostname: eurekaSecond
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka/,http://localhost:8763/eureka/
-    register-with-eureka: false  #关闭自我注册
-    fetch-registry: false
+      #完成3个server服务间的相互注册
+      defaultZone: http://eurekaFirst:8761/eureka/,http://eurekaThird:8761/eureka/
+    #表示是否注册自身到eureka服务器
+    register-with-eureka: true
+    #是否从eureka上获取注册信息
+    fetch-registry: true
   server:
     enable-self-preservation: false  #开发环境关闭自我保护机制
 spring:
